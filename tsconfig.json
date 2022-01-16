@@ -15,15 +15,13 @@
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "exclude": ["src/setupTests.ts"],
-  "include": ["src"]
+  "include": ["src", "global.d.ts"]
 }
