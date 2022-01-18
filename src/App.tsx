@@ -1,17 +1,31 @@
-import { Link, Outlet } from 'react-router-dom';
-import { AppRoutes } from './utils/routes';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import './App.css';
+import { AuthProvider } from 'providers/AuthProvider';
+
+// import { AdminPage } from 'pages/Admin';
+import { ErrorPage } from './pages/Error';
+import { GalleryPage } from './pages/Gallery';
+// import { LoginPage } from 'pages/Login';
+import { PortfolioPage } from './pages/Portfolio';
+import { ProfilePage } from './pages/Profile';
+// import { RequireAuth } from 'components/RequireAuth/RequireAuth';
 
 export const App: React.FC = () => {
   return (
-    <div className="app">
-      <nav className="app-nav">
-        <Link to={AppRoutes.Gallery}>Gallery</Link>
-        <Link to={AppRoutes.Portfolio}>Portfolio</Link>
-        <Link to={AppRoutes.Profile}>Profile</Link>
-      </nav>
-      <Outlet />
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/">
+            <Route path="" element={<GalleryPage />} />
+            {/* <Route path="login" element={<LoginPage />} /> */}
+            <Route path="gallery" element={<GalleryPage />} />
+            <Route path="portfolio" element={<PortfolioPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            {/* <Route path="admin" element={<AdminPage />} /> */}
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 };
