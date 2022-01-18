@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { AuthProvider } from 'providers/AuthProvider';
+// import { AuthProvider } from 'providers/AuthProvider';
 
 // import { AdminPage } from 'pages/Admin';
 import { ErrorPage } from './pages/Error';
@@ -13,19 +13,17 @@ import { ProfilePage } from './pages/Profile';
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/">
-            <Route path="" element={<GalleryPage />} />
-            {/* <Route path="login" element={<LoginPage />} /> */}
-            <Route path="gallery" element={<GalleryPage />} />
-            <Route path="portfolio" element={<PortfolioPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            {/* <Route path="admin" element={<AdminPage />} /> */}
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route path="/">
+          <Route path="" element={<GalleryPage />} />
+          {/* <Route path="login" element={<LoginPage />} /> */}
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          {/* <Route path="admin" element={<AdminPage />} /> */}
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };
