@@ -10,6 +10,7 @@ import { PortfolioPage } from './pages/Portfolio';
 import { ProfilePage } from './pages/Profile';
 // import { RequireAuth } from 'components/RequireAuth/RequireAuth';
 
+// TODO: add custom them provider
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
