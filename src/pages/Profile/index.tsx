@@ -1,10 +1,14 @@
-import { Navigation } from "components/Navigation/Navigation";
+import { Container, Typography } from '@mui/material';
+
+import { Navigation } from 'components/Navigation/Navigation';
 
 export const ProfilePage = () => {
   return (
-    <div>
+    <>
       <Navigation />
-      <p>Profile</p>
-    </div>
+      <Container maxWidth="xl" sx={{ mt: 2 }}>
+        <Typography>Profile</Typography>
+      </Container>
+    </>
   );
 };

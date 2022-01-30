@@ -1,10 +1,14 @@
+import { Container, Typography } from '@mui/material';
+
 import { Navigation } from 'components/Navigation/Navigation';
 
 export const PortfolioPage = () => {
   return (
-    <div>
+    <>
       <Navigation />
-      <p>Portfolio</p>
-    </div>
+      <Container maxWidth="xl" sx={{ mt: 2 }}>
+        <Typography>Portfolio</Typography>
+      </Container>
+    </>
   );
 };
