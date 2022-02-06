@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 
 import { auth } from 'utils/firebase';
-import { AuthReturnType } from 'types/auth-types';
+import { AuthReturnType } from 'types/auth';
 import { FirebaseErrorReturnType } from 'types/shared';
 
 export const signUpForApp = async (email: string, password: string): Promise<AuthReturnType> => {
@@ -48,9 +48,11 @@ export const loginToApp = async (email: string, password: string): Promise<AuthR
   }
 };
 
-export const logoutFromApp = async (): Promise<FirebaseErrorReturnType | void> => {
+export const logoutFromApp = async (): Promise<FirebaseErrorReturnType> => {
   try {
     await signOut(auth);
+
+    return {};
   } catch (e: any) {
     console.log((e as FirebaseError).code);
 
