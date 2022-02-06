@@ -4,6 +4,7 @@ import { AuthReturnType } from 'types/auth';
 import { AppRoutes } from 'utils/routes';
 import { AuthForm } from './AuthForm';
 import { useAuthPage } from 'pages/Auth/hooks/useAuthPage';
+import { fetchAdminStatus } from 'api/auth';
 
 const { Content } = Layout;
 
@@ -21,18 +22,19 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
   authFn,
 }) => {
   const {
-    setUser,
     email,
-    setEmail,
     password,
-    setPassword,
     errorMsg,
-    setErrorMsg,
     showAlert,
-    setShowAlert,
     submitting,
-    setSubmitting,
     loading,
+    setUser,
+    setIsAdmin,
+    setEmail,
+    setPassword,
+    setErrorMsg,
+    setShowAlert,
+    setSubmitting,
     navigate,
   } = useAuthPage();
 
@@ -43,30 +45,34 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
     setShowAlert(false);
     setErrorMsg('');
 
-    const { userCredential, error } = await authFn(email, password);
+    const { userCredential, error: authError } = await authFn(email, password);
+
+    if (authError) {
+      setShowAlert(true);
+      setErrorMsg(authError.code);
+
+      return;
+    }
+
+    if (userCredential) {
+      const isAdmin = await fetchAdminStatus(userCredential.user.uid);
+
+      // save user and admin status in context for auth provider
+      setUser(userCredential.user);
+      setIsAdmin(isAdmin);
+
+      // prevent backtracking to login page
+      navigate(AppRoutes.Gallery, { replace: true });
+    }
 
     setTimeout(() => {
       setSubmitting(false);
-
-      if (error) {
-        setShowAlert(true);
-        setErrorMsg(error.code);
-        return;
-      }
-
-      if (userCredential) {
-        // save user in context for auth provider
-        setUser(userCredential.user);
-
-        // prevent backtracking to login page
-        navigate(AppRoutes.Gallery, { replace: true });
-      }
     }, 1000);
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>

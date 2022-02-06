@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from 'providers/AuthProvider';
 
+import { AdminPage } from 'pages/Admin';
 import { ErrorPage } from './pages/Error';
 import { GalleryPage } from './pages/Gallery';
 import { LoginPage } from 'pages/Auth/Login';
@@ -11,6 +12,7 @@ import { RequireAuth } from 'components/RequireAuth/RequireAuth';
 import { SignUpPage } from 'pages/Auth/SignUp';
 
 import 'antd/dist/antd.css';
+import { RequireAdminAuth } from 'components/RequireAdminAuth/RequireAdminAuth';
 
 // TODO: add custom them provider
 export const App: React.FC = () => {
@@ -44,6 +46,14 @@ export const App: React.FC = () => {
                 <RequireAuth>
                   <ProfilePage />
                 </RequireAuth>
+              }
+            />
+            <Route
+              path="admin"
+              element={
+                <RequireAdminAuth>
+                  <AdminPage />
+                </RequireAdminAuth>
               }
             />
             <Route path="*" element={<ErrorPage />} />

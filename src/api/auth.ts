@@ -8,9 +8,10 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
-import { auth } from 'utils/firebase';
+import { auth, db } from 'utils/firebase';
 import { AuthReturnType } from 'types/auth';
 import { FirebaseErrorReturnType } from 'types/shared';
+import { child, DataSnapshot, get, ref } from 'firebase/database';
 
 export const signUpForApp = async (email: string, password: string): Promise<AuthReturnType> => {
   try {
@@ -57,5 +58,21 @@ export const logoutFromApp = async (): Promise<FirebaseErrorReturnType> => {
     console.log((e as FirebaseError).code);
 
     return { error: e as FirebaseError };
+  }
+};
+
+export const fetchAdminStatus = async (uid: string): Promise<boolean> => {
+  try {
+    const snapshot: DataSnapshot = await get(child(ref(db), 'admin/ids'));
+
+    if (!snapshot.exists()) {
+      return false;
+    }
+
+    return (snapshot.val() as string[]).includes(uid);
+  } catch (e: any) {
+    console.log((e as FirebaseError).code);
+
+    return false;
   }
 };

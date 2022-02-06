@@ -1,0 +1,34 @@
+
+.sync-card {
+  display: flex;
+  background-color: paleturquoise;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.counts {
+  padding: 4px;
+  border: 2px solid red;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  z-index: 2;
+  background-color: white;
+}

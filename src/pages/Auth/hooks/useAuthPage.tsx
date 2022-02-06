@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'utils/routes';
 
 export const useAuthPage = () => {
-  const { user, setUser } = useContext<AuthContextType>(AuthContext);
+  const { user, loading, setUser, setIsAdmin, setLoading } =
+    useContext<AuthContextType>(AuthContext);
 
   // TODO: rework this to be undefined by default —— add client-side check for validation
   const [email, setEmail] = useState('');
@@ -12,17 +13,17 @@ export const useAuthPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   useEffect(() => {
     if (user) {
@@ -32,18 +33,19 @@ export const useAuthPage = () => {
 
   return {
     user,
-    setUser,
     email,
-    setEmail,
     password,
-    setPassword,
     errorMsg,
-    setErrorMsg,
     showAlert,
-    setShowAlert,
     submitting,
-    setSubmitting,
     loading,
+    setUser,
+    setIsAdmin,
+    setEmail,
+    setPassword,
+    setErrorMsg,
+    setShowAlert,
+    setSubmitting,
     setLoading,
     navigate,
   };
