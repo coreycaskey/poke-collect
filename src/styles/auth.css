@@ -1,0 +1,9 @@
+.auth-redirect-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-redirect-link > span {
+  text-decoration: underline;
+}
