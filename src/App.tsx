@@ -12,7 +12,6 @@ import { SignUpPage } from 'pages/Auth/SignUp';
 
 import 'antd/dist/antd.css';
 
-// TODO: add custom them provider
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
