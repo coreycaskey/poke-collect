@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { AuthContext, AuthContextType } from 'providers/AuthProvider';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,8 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { logoutFromApp } from 'api/auth';
 import { AppRoutes } from '../../utils/routes';
-
-import styles from './Navigation.module.css';
 
 // TODO: prevent admin from accessing pages other than admin page???
 export const Navigation: React.FC = () => {
